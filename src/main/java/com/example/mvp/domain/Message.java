@@ -2,15 +2,16 @@ package com.example.mvp.domain;
 
 import javax.persistence.*;
 
-@Entity // Дает знать спрингу, что это сущность которуую нужно сохранять в БД
+@Entity
 public class Message {
-    @Id//ID
-    @GeneratedValue(strategy=GenerationType.AUTO) // Spring автоматически генерирует ID
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
     private String text;
     private String tag;
-    @ManyToOne(fetch = FetchType.EAGER)//один автор много сообщений
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
 
@@ -18,29 +19,30 @@ public class Message {
     }
 
     public Message(String text, String tag,User user) {
+        this.author=user;
         this.text = text;
         this.tag = tag;
-        this.author=user;
     }
 
     public String getAuthorName()
     {
-        return author!=null ? author.getUsername() : "<none>";
-    }
-    public Integer getId() {
-        return id;
+        return author!=null ? author.getUsername():"<none>";
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTag() {

@@ -10,22 +10,18 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usr")
-public class User implements UserDetails
-{
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String username;
     private String password;
     private boolean active;
 
-    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER /*Определяет как будут подгружаться данные*/ )// Помогает не создавать дополнительную таблицу для Enum  а делает само
-    @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id")/*Позволяет создать таблицу которая будет соединяться с текущей при помощи user_id */)
-    //описает поле которое будет храниться в отдельной таблице
-    @Enumerated(EnumType.STRING) // хотим enum хранить в виде строки
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
 
     public Long getId() {
         return id;
