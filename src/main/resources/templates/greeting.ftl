@@ -2,6 +2,6 @@
 <@c.page>
 <h5>Hello, guest</h5>
     <div>
-        This is twitter
+        This is MVP
     </div>
 </@c.page>
