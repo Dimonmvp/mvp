@@ -164,15 +164,12 @@ public class MessageController {
             @PathVariable Message message,
             RedirectAttributes redirectAttributes,
             @RequestHeader(required = false) String referer
-    )
-    {
-        Set<User> likes =message.getLikes();
-        if (likes.contains(currentUser))
-        {
+    ) {
+        Set<User> likes = message.getLikes();
+
+        if (likes.contains(currentUser)) {
             likes.remove(currentUser);
-        }
-        else
-        {
+        } else {
             likes.add(currentUser);
         }
 
@@ -182,6 +179,6 @@ public class MessageController {
                 .entrySet()
                 .forEach(pair -> redirectAttributes.addAttribute(pair.getKey(), pair.getValue()));
 
-        return "redirect:"+components.getPath();
+        return "redirect:" + components.getPath();
     }
 }
